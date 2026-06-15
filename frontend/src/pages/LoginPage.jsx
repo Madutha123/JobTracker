@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useGoogleLogin } from '@react-oauth/google';
 import AuthPanel from '../components/AuthPanel';
 import { useToast } from '../components/Toast';
 import { authApi } from '../services/api';
@@ -19,6 +20,21 @@ function GoogleIcon() {
 export default function LoginPage() {
   const navigate = useNavigate();
   const toast = useToast();
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const { data } = await authApi.googleLogin(tokenResponse.access_token);
+        localStorage.setItem('jt_token', data.token);
+        localStorage.setItem('jt_user', JSON.stringify({ username: data.username, email: data.email }));
+        toast.success('Signed in with Google', `Welcome, ${data.username}`);
+        navigate('/dashboard');
+      } catch {
+        toast.error('Google sign-in failed', 'Could not authenticate with this account.');
+      }
+    },
+    onError: () => toast.error('Google sign-in failed', 'The popup was closed or an error occurred.'),
+  });
 
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
@@ -59,7 +75,7 @@ export default function LoginPage() {
   }
 
   function handleGoogleClick() {
-    toast.info('Coming soon', 'Google sign-in is not available yet.');
+    googleLogin();
   }
 
   return (

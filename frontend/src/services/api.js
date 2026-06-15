@@ -27,6 +27,12 @@ export const authApi = {
    * @param {{ email: string, password: string }} data
    */
   login: (data) => api.post('/api/auth/login', { username: data.email, password: data.password }),
+
+  /**
+   * Sign in with Google OAuth access token.
+   * @param {string} credential - access token from Google
+   */
+  googleLogin: (credential) => api.post('/api/auth/oauth/google', { credential }),
 };
 
 export default api;

@@ -1,6 +1,7 @@
 package com.example.jobtracker.auth.controller;
 
 import com.example.jobtracker.auth.dto.AuthResponse;
+import com.example.jobtracker.auth.dto.GoogleOAuthRequest;
 import com.example.jobtracker.auth.dto.LoginRequest;
 import com.example.jobtracker.auth.dto.RegisterRequest;
 import com.example.jobtracker.auth.service.AuthService;
@@ -26,6 +27,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/oauth/google")
+    public ResponseEntity<AuthResponse> googleOAuth(@Valid @RequestBody GoogleOAuthRequest request) {
+        AuthResponse response = authService.oauthLogin(request.getCredential());
         return ResponseEntity.ok(response);
     }
 }
