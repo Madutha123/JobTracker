@@ -64,6 +64,7 @@ public class AuthService {
         );
 
         User user = userRepository.findByUsername(request.getUsername())
+                .or(() -> userRepository.findByEmail(request.getUsername()))
                 .orElseThrow(() -> new RuntimeException("User not found after authentication"));
 
         logger.info("User '{}' logged in successfully", user.getUsername());

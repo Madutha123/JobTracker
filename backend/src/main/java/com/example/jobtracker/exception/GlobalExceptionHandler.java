@@ -1,5 +1,7 @@
-package com.example.jobtracker.auth.exception;
+package com.example.jobtracker.exception;
 
+import com.example.jobtracker.auth.exception.EmailAlreadyExistsException;
+import com.example.jobtracker.auth.exception.UsernameAlreadyExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

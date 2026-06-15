@@ -1,5 +1,6 @@
-package com.example.jobtracker.auth.config;
+package com.example.jobtracker.config;
 
+import com.example.jobtracker.auth.config.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

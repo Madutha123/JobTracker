@@ -1,4 +1,4 @@
-package com.example.jobtracker.auth.config;
+package com.example.jobtracker.config;
 
 import com.example.jobtracker.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,10 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByUsername(username)
+        return identifier -> userRepository.findByUsername(identifier)
+                .or(() -> userRepository.findByEmail(identifier))
                 .orElseThrow(() -> new UsernameNotFoundException(
-                        "User not found: " + username));
+                        "User not found: " + identifier));
     }
 
     @Bean
