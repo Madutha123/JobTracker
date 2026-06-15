@@ -1,5 +1,12 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.service;
 
+import com.example.jobtracker.auth.dto.AuthResponse;
+import com.example.jobtracker.auth.dto.LoginRequest;
+import com.example.jobtracker.auth.dto.RegisterRequest;
+import com.example.jobtracker.auth.exception.EmailAlreadyExistsException;
+import com.example.jobtracker.auth.exception.UsernameAlreadyExistsException;
+import com.example.jobtracker.auth.model.User;
+import com.example.jobtracker.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

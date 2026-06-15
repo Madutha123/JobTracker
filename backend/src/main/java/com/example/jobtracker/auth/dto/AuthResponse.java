@@ -1,4 +1,4 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

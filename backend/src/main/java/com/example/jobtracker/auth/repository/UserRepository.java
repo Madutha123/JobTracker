@@ -1,5 +1,6 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.repository;
 
+import com.example.jobtracker.auth.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

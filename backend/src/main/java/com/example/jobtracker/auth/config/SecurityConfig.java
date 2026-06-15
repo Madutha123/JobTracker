@@ -1,4 +1,4 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -43,9 +43,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /**
-     * Permissive CORS for local development — tighten for production.
-     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();

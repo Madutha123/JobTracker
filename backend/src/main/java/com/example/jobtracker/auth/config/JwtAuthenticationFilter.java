@@ -1,5 +1,6 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.config;
 
+import com.example.jobtracker.auth.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

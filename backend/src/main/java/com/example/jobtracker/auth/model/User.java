@@ -1,4 +1,4 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.model;
 
 import jakarta.persistence.*;
 import lombok.*;

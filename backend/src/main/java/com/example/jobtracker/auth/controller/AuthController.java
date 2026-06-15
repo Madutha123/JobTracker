@@ -1,5 +1,9 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.controller;
 
+import com.example.jobtracker.auth.dto.AuthResponse;
+import com.example.jobtracker.auth.dto.LoginRequest;
+import com.example.jobtracker.auth.dto.RegisterRequest;
+import com.example.jobtracker.auth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,20 +17,12 @@ public class AuthController {
 
     private final AuthService authService;
 
-    /**
-     * Register a new user.
-     * POST /api/auth/register
-     */
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         AuthResponse response = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    /**
-     * Authenticate an existing user and return a JWT.
-     * POST /api/auth/login
-     */
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = authService.login(request);

@@ -1,5 +1,6 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.config;
 
+import com.example.jobtracker.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,11 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/**
- * Infrastructure beans that are deliberately separated from SecurityConfig to
- * avoid the circular dependency:
- *   SecurityConfig → JwtAuthenticationFilter → UserDetailsService → SecurityConfig
- */
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {

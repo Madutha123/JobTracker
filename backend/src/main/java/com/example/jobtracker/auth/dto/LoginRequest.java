@@ -1,4 +1,4 @@
-package com.example.jobtracker.auth;
+package com.example.jobtracker.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
