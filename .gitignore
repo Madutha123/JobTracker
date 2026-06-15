@@ -1,0 +1,15 @@
+# AI agent / tooling metadata 
+.agents/
+skills-lock.json
+
+# JVM crash logs 
+hs_err_pid*.log
+replay_pid*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+*.iml
