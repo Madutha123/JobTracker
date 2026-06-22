@@ -71,4 +71,22 @@ public class GlobalExceptionHandler {
         problem.setDetail("An unexpected error occurred");
         return problem;
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ProblemDetail handleResourceNotFound(ResourceNotFoundException ex) {
+        logger.warn("Resource not found: {}", ex.getMessage());
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problem.setTitle("Resource Not Found");
+        problem.setDetail(ex.getMessage());
+        return problem;
+    }
+
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ProblemDetail handleAccessDenied(org.springframework.security.access.AccessDeniedException ex) {
+        logger.warn("Access denied: {}", ex.getMessage());
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.FORBIDDEN);
+        problem.setTitle("Access Denied");
+        problem.setDetail("You do not have permission to access this resource");
+        return problem;
+    }
 }
