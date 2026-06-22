@@ -37,4 +37,32 @@ export const authApi = {
   googleLogin: (credential) => api.post('/api/auth/oauth/google', { credential }),
 };
 
+export const companyApi = {
+  search: (query) => api.get('/api/companies', { params: { search: query } }),
+  create: (data) => api.post('/api/companies', data),
+};
+
+export const applicationApi = {
+  getAll: () => api.get('/api/applications'),
+  getOne: (id) => api.get(`/api/applications/${id}`),
+  create: (data) => api.post('/api/applications', data),
+  update: (id, data) => api.put(`/api/applications/${id}`, data),
+  delete: (id) => api.delete(`/api/applications/${id}`),
+};
+
+export const attachmentApi = {
+  upload: (applicationId, file, fileType) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileType', fileType);
+    return api.post(`/api/applications/${applicationId}/attachments`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
+  getAll: (applicationId) => api.get(`/api/applications/${applicationId}/attachments`),
+  delete: (applicationId, attachmentId) =>
+    api.delete(`/api/applications/${applicationId}/attachments/${attachmentId}`),
+};
+
 export default api;
+

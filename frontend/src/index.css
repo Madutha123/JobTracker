@@ -831,9 +831,19 @@ html, body, #root {
   color: var(--navy);
 }
 
-.db-status-badge--interviewing {
-  background: rgba(75, 86, 148, 0.15);
-  color: var(--brand);
+.db-status-badge--under_review {
+  background: rgba(114, 136, 174, 0.25);
+  color: #5d6d7e;
+}
+
+.db-status-badge--interview_scheduled {
+  background: rgba(243, 156, 18, 0.15);
+  color: #d35400;
+}
+
+.db-status-badge--interviewed {
+  background: rgba(241, 196, 15, 0.15);
+  color: #b7950b;
 }
 
 .db-status-badge--offer {
@@ -844,6 +854,16 @@ html, body, #root {
 .db-status-badge--rejected {
   background: rgba(192, 57, 43, 0.15);
   color: #c0392b;
+}
+
+.db-status-badge--withdrawn {
+  background: rgba(120, 144, 156, 0.15);
+  color: #546e7a;
+}
+
+.db-search-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* Workload-style progress blocks */
