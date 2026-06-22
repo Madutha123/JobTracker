@@ -40,6 +40,7 @@ export const authApi = {
 export const companyApi = {
   search: (query) => api.get('/api/companies', { params: { search: query } }),
   create: (data) => api.post('/api/companies', data),
+  update: (id, data) => api.put(`/api/companies/${id}`, data),
 };
 
 export const applicationApi = {

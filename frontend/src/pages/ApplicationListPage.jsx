@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import { useToast } from '../components/Toast';
-import { applicationApi, attachmentApi } from '../services/api';
+import { applicationApi, attachmentApi, companyApi } from '../services/api';
 import ApplicationDetailsModal from '../components/ApplicationDetailsModal';
 
 /* ── SVG Icons ─────────────────────────────────────────── */
@@ -41,6 +41,7 @@ export default function ApplicationListPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedJobId, setSelectedJobId] = useState(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [modalInitialEditMode, setModalInitialEditMode] = useState(false);
 
   // Attachments State
   const [attachments, setAttachments] = useState([]);
@@ -203,7 +204,30 @@ export default function ApplicationListPage() {
 
   const handleOpenDetails = (jobId) => {
     setSelectedJobId(jobId);
+    setModalInitialEditMode(false);
     setIsDetailsOpen(true);
+  };
+
+  const handleEditClick = (e, jobId) => {
+    e.stopPropagation();
+    setSelectedJobId(jobId);
+    setModalInitialEditMode(true);
+    setIsDetailsOpen(true);
+  };
+
+  const handleSaveDetails = async (jobId, jobPayload, companyId, companyPayload) => {
+    try {
+      if (companyId) {
+        await companyApi.update(companyId, companyPayload);
+      }
+      const res = await applicationApi.update(jobId, jobPayload);
+      setJobs(prev => prev.map(j => j.id === jobId ? res.data : j));
+      toast.success('Changes saved', 'Details updated successfully.');
+    } catch (err) {
+      console.error(err);
+      toast.error('Save failed', err.response?.data?.message || 'Could not update details.');
+      throw err;
+    }
   };
 
   return (
@@ -306,6 +330,12 @@ export default function ApplicationListPage() {
                             </div>
                           </div>
                           <button
+                            onClick={(e) => handleEditClick(e, job.id)}
+                            className="db-card-action-btn border border-indigo-200 text-[var(--brand)] hover:bg-indigo-50 hover:border-indigo-400 mr-2"
+                          >
+                            Edit
+                          </button>
+                          <button
                             onClick={(e) => {
                               e.stopPropagation();
                               triggerDeleteConfirm(job.id, job.jobTitle, job.company?.name);
@@ -348,6 +378,8 @@ export default function ApplicationListPage() {
         uploadingAttachment={uploadingAttachment}
         newFileType={newFileType}
         onNewFileTypeChange={setNewFileType}
+        initialEditMode={modalInitialEditMode}
+        onSaveDetails={handleSaveDetails}
       />
 
       {/* Custom Delete Confirmation Modal */}
