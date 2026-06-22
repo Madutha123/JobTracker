@@ -3,6 +3,8 @@ import { ToastProvider } from './components/Toast';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import ApplicationListPage from './pages/ApplicationListPage';
+import CreateApplicationPage from './pages/CreateApplicationPage';
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('jt_token');
@@ -22,6 +24,22 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/applications"
+            element={
+              <ProtectedRoute>
+                <ApplicationListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/create-application"
+            element={
+              <ProtectedRoute>
+                <CreateApplicationPage />
               </ProtectedRoute>
             }
           />
