@@ -51,6 +51,10 @@ export const applicationApi = {
   delete: (id) => api.delete(`/api/applications/${id}`),
 };
 
+export const dashboardApi = {
+  getStats: () => api.get('/api/dashboard/stats'),
+};
+
 export const attachmentApi = {
   upload: (applicationId, file, fileType) => {
     const formData = new FormData();
